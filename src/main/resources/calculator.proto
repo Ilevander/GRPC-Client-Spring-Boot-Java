@@ -1,0 +1,60 @@
+syntax = "proto3";
+option java_package = "com.ilyass.grpcserver";
+
+service CalculatorService{
+  //Unary Model :
+  rpc sum(UnaryRequest) returns (UnaryResponse);
+
+  //Server Streaming Model
+  rpc getOperationStream(ServerStreamRequest) returns (stream ServerStreamResponse);
+
+  //Client Streaming Model
+  rpc performStream(stream ClientStreamRequest) returns (ClientStreamResponse);
+
+  //Bidirectional Streaming Model
+  rpc fullStream(stream BidirectionalStreamRequest) returns (stream BidirectionalStreamResponse);
+}
+
+//Using for Unary Request and response example
+message UnaryRequest {
+  double a = 1;
+  double b = 2;
+}
+
+message UnaryResponse {
+  double a = 1;
+  double b = 2;
+  double result = 3;
+}
+
+//Using for server Streaming Request and response example
+message ServerStreamRequest {
+  double a = 1;
+  double b = 2;
+}
+
+message ServerStreamResponse {
+  double a = 1;
+  double b = 2;
+  double result = 3;
+  string type = 4;
+}
+
+//Using for Client Streaming Request and response example
+message ClientStreamRequest {
+  double a = 1;
+}
+
+message ClientStreamResponse {
+  double result = 1;
+  repeated double receivedData = 2;
+}
+
+//Using for Bidirectional Streaming Request and response example
+message BidirectionalStreamRequest {
+  double a = 1;
+}
+
+message BidirectionalStreamResponse {
+  double result = 1;
+}
